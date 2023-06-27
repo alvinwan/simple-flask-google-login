@@ -37,7 +37,12 @@ manager = FlaskGoogleLogin()
 manager.init_app(app)
 ```
 
-Here are several customizations you can make with this utility out of the box.
+**And you're done!** This is all you need. Now, load the `/login` URL for your
+application to start the login flow. Load the `/logout` URL to logout. For a
+minimal example, see the `examples/` directory.
+
+**Advanced user**? Keep reading. Here are several customizations you can make
+with this utility out of the box.
 
 ## Customize Google Login
 
