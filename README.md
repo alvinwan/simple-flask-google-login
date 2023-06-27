@@ -1,4 +1,4 @@
-# Flask Google Login
+# Flask Google Signin
 
 Written by [Alvin Wan](https://alvinwan.com) for educational purposes. See the
 accompanying tutorial on
@@ -14,21 +14,21 @@ it's an easy way to get up and running with Google login without much work.
 Install the utility with pip.
 
 ```bash
-pip install flask-google-login
+pip install flask-google-signin
 ```
 
 Initialize the utility's manager with the Flask app.
 
 ```python
-from flask_google_login import FlaskGoogleLogin
+from flask_google_signin import FlaskGoogleSignin
 
-FlaskGoogleLogin(app)
+FlaskGoogleSignin(app)
 ```
 
 Alternatively, initialize with the app after construction.
 
 ```python
-manager = FlaskGoogleLogin()
+manager = FlaskGoogleSignin()
 manager.init_app(app)
 ```
 
@@ -37,25 +37,25 @@ Note that you need 4 prerequisites in order for this to work:
 1. **Client Credentials:** This application by default expects
 `client_secrets.json` to be in the same directory as the application. This is
 the file downloaded from the Google developers console. You can change this by
-passing the `client_secrets_path` argument to the `FlaskGoogleLogin`
+passing the `client_secrets_path` argument to the `FlaskGoogleSignin`
 constructor.
 2. **https:** You must use SSL. Simply add `app.run(ssl_context='adhoc', ...)`.
 3. **Secret Key:** Your app must have a secret key set.
 4. **Accepted Redirect URI:** On the Google developer console, your Oauth2
 client must list the redirect URI `https://127.0.0.1:5000` as an accepted
 redirect URI. This is the default redirect URI. You can change this by passing
-the `redirect_uri` argument to the `FlaskGoogleLogin` constructor.
+the `redirect_uri` argument to the `FlaskGoogleSignin` constructor.
 
 Here's a minimal example with all of these elements.
 
 ```python
 from flask import Flask, session
-from flask_google_login import FlaskGoogleLogin
+from flask_google_signin import FlaskGoogleSignin
 
 
 app = Flask("Google Login App")
 app.secret_key = "YourSecretKeyHere"  # Secret key is needed for OAuth 2.0
-FlaskGoogleLogin(app)
+FlaskGoogleSignin(app)
 
 
 @app.route("/")
@@ -92,7 +92,7 @@ You can change any of the usual Google login configurations:
   login callback page.
 
 ```python
-manager = FlaskGoogleLogin(
+manager = FlaskGoogleSignin(
     client_secrets_path='/path/to/client_secrets.json',
     scopes=['profile', 'email'],
     redirect_uri='https://example.com/login/callback'
@@ -106,7 +106,7 @@ a general login page with several options. You could then redefine these
 routes to be `/google/login`, for example.
 
 ```python
-manager = FlaskGoogleLogin()
+manager = FlaskGoogleSignin()
 manager.init_app(app, login_endpoint='/google/login')
 # creates a login route at `/google/login`
 ```
@@ -122,14 +122,14 @@ def handler(authorization_url):
     webbrowser.open(authorization_url)
     return f"If redirect fails, click <a href='{authorization_url}'>here</a>."
 
-manager = FlaskGoogleLogin(authorization_url_handler=handler)
+manager = FlaskGoogleSignin(authorization_url_handler=handler)
 ```
 
 Finally, you can ask the manager to completely skip an endpoint and write one
 from scratch, by "naming" the endpoint `None`.
 
 ```python
-manager = FlaskGoogleLogin()
+manager = FlaskGoogleSignin()
 manager.init_app(app, login_endpoint=None)
 ```
 
