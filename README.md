@@ -25,16 +25,43 @@ from flask_google_login import FlaskGoogleLogin
 FlaskGoogleLogin(app)
 ```
 
-**Note**: This application by default expects `client_secrets.json` to be in the
-same directory as the application. This is the file downloaded from the Google
-developers console. You can change this by passing the `client_secrets_path`
-argument to the `FlaskGoogleLogin` constructor.
-
 Alternatively, initialize with the app after construction.
 
 ```python
 manager = FlaskGoogleLogin()
 manager.init_app(app)
+```
+
+Note that you need 3 prerequisites in order for this to work:
+1. **Client Credentials:** This application by default expects
+`client_secrets.json` to be in the same directory as the application. This is
+the file downloaded from the Google developers console. You can change this by
+passing the `client_secrets_path` argument to the `FlaskGoogleLogin`
+constructor.
+2. **https:** You must use SSL. Simply add `app.run(ssl_context='adhoc', ...)`.
+3. **Secret Key:** Your app must have a secret key set.
+
+Here's a minimal example with all of these elements.
+
+```python
+from flask import Flask, session
+from flask_google_login import FlaskGoogleLogin
+
+
+app = Flask("Google Login App")
+app.secret_key = "YourSecretKeyHere"  # Secret key is needed for OAuth 2.0
+FlaskGoogleLogin(app)
+
+
+@app.route("/")
+def index():
+    if 'name' in session:
+        return f"Hello {session['name']}! <a href='/logout'>Logout</a>"
+    return "<a href='/login'>Login</a>"
+
+
+if __name__ == "__main__":
+    app.run(ssl_context='adhoc')
 ```
 
 **And you're done!** This is all you need. Now, load the `/login` URL for your
@@ -44,7 +71,7 @@ minimal example, see the `examples/` directory.
 **Advanced user**? Keep reading. Here are several customizations you can make
 with this utility out of the box.
 
-## Customize Google Login
+## Advanced: Customize Google Login
 
 You can change any of the usual Google login configurations:
 
@@ -67,7 +94,7 @@ manager = FlaskGoogleLogin(
 )
 ```
 
-## Customize routes
+## Advanced: Customize routes
 
 You can rename any of the routes. For example, say you want to use `/login` for
 a general login page with several options. You could then redefine these
