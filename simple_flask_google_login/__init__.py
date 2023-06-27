@@ -77,6 +77,7 @@ class SimpleFlaskGoogleLogin:
             app.add_url_rule(callback_endpoint, view_func=self.callback)
         if logout_endpoint is not None:
             app.add_url_rule(logout_endpoint, view_func=self.logout)
+        app.before_request(self.before_request)
 
     @property
     def flow(self):
@@ -138,3 +139,11 @@ class SimpleFlaskGoogleLogin:
         By default, after logout, simply redirect back to the homepage.
         """
         return redirect('/')
+    
+    def before_request(self):
+        """
+        NOTE: Hacking this in as we're forcing SSL below. Without this, all
+        request.{url,base_url} calls will use http incorrectly when assembling
+        oauth redirect URLs.
+        """
+        request.scheme = 'https'
