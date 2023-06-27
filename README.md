@@ -32,7 +32,8 @@ manager = FlaskGoogleLogin()
 manager.init_app(app)
 ```
 
-Note that you need 3 prerequisites in order for this to work:
+Note that you need 4 prerequisites in order for this to work:
+
 1. **Client Credentials:** This application by default expects
 `client_secrets.json` to be in the same directory as the application. This is
 the file downloaded from the Google developers console. You can change this by
@@ -40,6 +41,10 @@ passing the `client_secrets_path` argument to the `FlaskGoogleLogin`
 constructor.
 2. **https:** You must use SSL. Simply add `app.run(ssl_context='adhoc', ...)`.
 3. **Secret Key:** Your app must have a secret key set.
+4. **Accepted Redirect URI:** On the Google developer console, your Oauth2
+client must list the redirect URI `https://127.0.0.1:5000` as an accepted
+redirect URI. This is the default redirect URI. You can change this by passing
+the `redirect_uri` argument to the `FlaskGoogleLogin` constructor.
 
 Here's a minimal example with all of these elements.
 
@@ -128,3 +133,14 @@ manager = FlaskGoogleLogin()
 manager.init_app(app, login_endpoint=None)
 ```
 
+## Why create this?
+
+My previous favorite [Flask-GoogleLogin](https://pypi.org/project/Flask-GoogleLogin/)
+is now deprecated, and I'm too lazy to relearn oauth2 every time I want to
+support Google login. This library is at least quick starter code. Granted,
+there are [many](https://github.com/andygarcia86/python-flask-google-oauth-login) 
+[other](https://github.com/seunkoko/Python-Flask-Google-Auth) 
+implementations, but I wanted a *super* barebones one -- not one mixed and
+matched with 
+[SQL and flask-login](https://github.com/realpython/materials/blob/master/flask-google-login/app.py)
+ and a slew of other random libraries.
