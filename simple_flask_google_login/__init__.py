@@ -61,6 +61,7 @@ class SimpleFlaskGoogleLogin:
         login_endpoint: Union[str, None] = '/login',
         callback_endpoint: Union[str, None] = '/login/callback',
         logout_endpoint: Union[str, None] = '/logout',
+        force_https: bool = True,
     ):
         """
         Register views with the Flask app.
@@ -77,7 +78,8 @@ class SimpleFlaskGoogleLogin:
             app.add_url_rule(callback_endpoint, view_func=self.callback)
         if logout_endpoint is not None:
             app.add_url_rule(logout_endpoint, view_func=self.logout)
-        app.before_request(self.before_request)
+        if force_https:
+            app.before_request(self.before_request)
 
     @property
     def flow(self):
