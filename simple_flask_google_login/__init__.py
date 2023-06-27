@@ -2,6 +2,7 @@
 Flask-friendly plugin for automatically adding login-related endpoints.
 """
 
+import os
 from typing import Callable, List, Union
 from flask import session, abort, redirect, request, url_for
 from google_auth_oauthlib.flow import Flow
@@ -87,11 +88,12 @@ class SimpleFlaskGoogleLogin:
         Get or create a new flow instance for this client.
         """
         if not hasattr(self, '_flow'):
-            default_redirect_uri = url_for('callback', _external=True)
+            redirect_uri = os.path.join(
+                request.host_url, url_for('callback')[1:])
             self._flow = Flow.from_client_secrets_file(
                 client_secrets_file=self.client_secrets_path,
                 scopes=self.scopes,
-                redirect_uri=self.redirect_uri or default_redirect_uri,
+                redirect_uri=self.redirect_uri or redirect_uri,
             )
         return self._flow
 
