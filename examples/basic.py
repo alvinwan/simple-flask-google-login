@@ -3,12 +3,12 @@ Basic usage example for flask-google-login.
 """
 
 from flask import Flask, session
-from flask_google_signin import FlaskGoogleSignin
+from flask_google_login import FlaskGoogleLogin
 
 
 app = Flask("Google Login App")
 app.secret_key = "YourSecretKeyHere"  # Secret key is needed for OAuth 2.0
-FlaskGoogleSignin(app)
+FlaskGoogleLogin(app)
 
 
 @app.route("/")

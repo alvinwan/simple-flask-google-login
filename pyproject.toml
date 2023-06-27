@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "flask-google-signin"
+name = "flask-google-login"
 version = "0.1.0"
 description = "Convenience utility for implementing Google login with Flask."
 readme = "README.md"
@@ -13,7 +13,7 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
-keywords = ["flask", "google", "login", "signin", "tutorial"]
+keywords = ["flask", "google", "login", "tutorial"]
 dependencies = [
     "flask",
     "google-auth-oauthlib",
@@ -21,4 +21,4 @@ dependencies = [
 requires-python = ">=3.8"
 
 [project.urls]
-Homepage = "https://github.com/alvinwan/flask-google-signin"
+Homepage = "https://github.com/alvinwan/flask-google-login"

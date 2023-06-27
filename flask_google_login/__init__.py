@@ -7,7 +7,7 @@ from flask import session, abort, redirect, request, url_for
 from google_auth_oauthlib.flow import Flow
 
 
-class FlaskGoogleSignin:
+class FlaskGoogleLogin:
     DEFAULT_SCOPES = [
         'https://www.googleapis.com/auth/userinfo.email',
         'openid',
