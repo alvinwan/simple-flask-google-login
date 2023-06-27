@@ -101,7 +101,7 @@ class FlaskGoogleLogin:
         """
         authorization_url, state = self.flow.authorization_url()
         session['state'] = state
-        return self.login_handler(authorization_url)
+        return self.authorization_url_handler(authorization_url)
 
     def callback(self):
         """
