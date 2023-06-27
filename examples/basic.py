@@ -1,3 +1,7 @@
+"""
+Basic usage example for flask-google-login.
+"""
+
 from flask import Flask, session
 from flask_google_login import FlaskGoogleLogin
 
