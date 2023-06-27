@@ -1,5 +1,5 @@
 """
-Basic usage example for flask-google-login.
+Basic usage example for simple-flask-google-login.
 """
 
 from flask import Flask, session

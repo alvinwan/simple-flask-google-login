@@ -14,7 +14,7 @@ it's an easy way to get up and running with Google login without much work.
 Install the utility with pip.
 
 ```bash
-pip install flask-google-login
+pip install simple-flask-google-login
 ```
 
 Initialize the utility's manager with the Flask app.
@@ -142,5 +142,5 @@ there are [many](https://github.com/andygarcia86/python-flask-google-oauth-login
 [other](https://github.com/seunkoko/Python-Flask-Google-Auth) 
 implementations, but I wanted a *super* barebones one -- not one mixed and
 matched with 
-[SQL and flask-login](https://github.com/realpython/materials/blob/master/flask-google-login/app.py)
+[SQL and flask-login](https://github.com/realpython/materials/blob/master/simple-flask-google-login/app.py)
  and a slew of other random libraries.
