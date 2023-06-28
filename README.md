@@ -40,11 +40,11 @@ the file downloaded from the Google developers console. You can change this by
 passing the `client_secrets_path` argument to the `SimpleFlaskGoogleLogin`
 constructor.
 2. **https:** You must use SSL. Simply add `app.run(ssl_context='adhoc', ...)`.
-3. **Secret Key:** Your app must have a secret key set.
+3. **Secret Key:** Your app must have a secret key set. `app.secret_key = ...`.
 4. **Accepted Redirect URI:** On the Google developer console, your Oauth2
-client must list the redirect URI `https://127.0.0.1:5000` as an accepted
-redirect URI. This is the default redirect URI. You can change this by passing
-the `redirect_uri` argument to the `SimpleFlaskGoogleLogin` constructor.
+client must list the redirect URI `https://127.0.0.1:5000/login/callback` as an
+accepted redirect URI. This is the default redirect URI. You can change this by
+passing the `redirect_uri` argument to the `SimpleFlaskGoogleLogin` constructor.
 
 Here's a minimal example with all of these elements.
 
